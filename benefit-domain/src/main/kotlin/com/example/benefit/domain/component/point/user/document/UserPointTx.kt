@@ -12,7 +12,11 @@ data class UserPointTx(
 
     val type: UserPointTxType,
 
+    val absAmount: Long,
+
     val amount: Long,
+
+    val details: List<UserPointTxDetail>,
 ) {
     @Id
     lateinit var id: String

@@ -11,9 +11,9 @@ import java.time.Instant
 data class UserPoint(
     val userId: String,
 
-    var remainingAmount: Long,
+    var balances: List<UserPointBalance>,
 
-    val balances: MutableList<UserPointBalance>,
+    var amount: Long,
 ) {
     @Id
     lateinit var id: String
@@ -24,11 +24,26 @@ data class UserPoint(
     @LastModifiedDate
     lateinit var modifiedAt: Instant
 
+    fun earn(point: Point, at: Instant) {
+        val remainingBalances = mutableListOf(UserPointBalance.of(point, at))
+        var remainingAmount = point.amount
+        for (balance in balances) {
+            if (!balance.isExpired(at)) {
+                remainingBalances.add(balance)
+                remainingAmount += balance.remainingAmount
+            } else {
+                break
+            }
+        }
+        balances = remainingBalances.sortedBy { it.expiredAt }
+        amount = remainingAmount
+    }
+
     companion object {
         fun of(userId: String, point: Point, at: Instant) = UserPoint(
             userId = userId,
-            remainingAmount = point.amount,
-            balances = mutableListOf(UserPointBalance.of(point, at)),
+            amount = point.amount,
+            balances = listOf(UserPointBalance.of(point, at)),
         )
     }
 }
