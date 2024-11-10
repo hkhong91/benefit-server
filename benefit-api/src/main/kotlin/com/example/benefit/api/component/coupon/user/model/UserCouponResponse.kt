@@ -3,7 +3,7 @@ package com.example.benefit.api.component.coupon.user.model
 import com.example.benefit.api.configuration.exception.ApiException
 import com.example.benefit.api.configuration.exception.ErrorCode
 import com.example.benefit.domain.component.coupon.policy.document.CouponIssueResult
-import com.example.benefit.domain.component.coupon.policy.document.CouponIssueStatus
+import com.example.benefit.domain.component.coupon.policy.data.CouponIssueStatus
 import com.example.benefit.domain.component.coupon.user.document.UserCoupon
 import java.time.Instant
 
@@ -17,6 +17,8 @@ data class UserCouponResponse(
     val expiredAt: Instant,
 ) {
     companion object {
+        fun listOf(userCoupons: List<UserCoupon>) = userCoupons.map { of(it) }
+
         fun of(userCoupon: UserCoupon) = UserCouponResponse(
             id = userCoupon.id,
             title = userCoupon.title,

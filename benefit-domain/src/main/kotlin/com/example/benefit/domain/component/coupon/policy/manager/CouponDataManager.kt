@@ -1,24 +1,22 @@
 package com.example.benefit.domain.component.coupon.policy.manager
 
 import com.example.benefit.domain.component.coupon.policy.document.Coupon
-import com.example.benefit.domain.component.coupon.policy.document.CouponLog
 import com.example.benefit.domain.component.coupon.policy.infrastructure.CouponGroupRepository
-import com.example.benefit.domain.component.coupon.policy.infrastructure.CouponLogRepository
+import com.example.benefit.domain.component.coupon.user.infrastructure.UserCouponRepository
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
+import java.time.Instant
 
 @Component
 class CouponDataManager(
-    private val couponLogRepository: CouponLogRepository,
     private val couponGroupRepository: CouponGroupRepository,
+    private val userCouponRepository: UserCouponRepository,
 ) {
-    fun handleAfterCreate(coupon: Coupon) {
-        couponLogRepository.save(CouponLog.of(coupon))
-    }
-
+    @Async
     fun handleAfterModify(modifiedCoupon: Coupon) {
         val couponId = modifiedCoupon.id
-        couponLogRepository.save(CouponLog.of(modifiedCoupon))
 
+        val now = Instant.now()
         for (group in couponGroupRepository.findAllByCouponsId(couponId)) {
             var isModified = false
             group.coupons
@@ -30,6 +28,12 @@ class CouponDataManager(
 
             if (isModified) {
                 couponGroupRepository.save(group)
+            }
+        }
+
+        for (userCoupon in userCouponRepository.findAllByCouponId(couponId)) {
+            if (!userCoupon.isEqualsTo(modifiedCoupon, now)) {
+                userCouponRepository.save(userCoupon.modify(modifiedCoupon, now))
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.benefit.domain.component.coupon.policy.document
+package com.example.benefit.domain.component.coupon.policy.data
 
 enum class CouponIssueStatus {
     PASSED,

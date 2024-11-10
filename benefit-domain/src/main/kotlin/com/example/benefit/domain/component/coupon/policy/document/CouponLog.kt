@@ -1,5 +1,6 @@
 package com.example.benefit.domain.component.coupon.policy.document
 
+import com.example.benefit.domain.component.coupon.policy.data.CouponStatus
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document

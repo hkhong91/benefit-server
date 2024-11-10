@@ -1,14 +1,15 @@
 package com.example.benefit.domain.component.coupon.policy.document
 
+import com.example.benefit.domain.component.coupon.policy.data.CouponBenefitType
 import kotlin.math.round
 
 data class CouponBenefit(
     val type: CouponBenefitType,
-    val amount: Int?,
+    val amount: Long?,
     val percentage: Float?,
-    val maxAmount: Int?,
+    val maxAmount: Long?,
 ) {
-    fun discount(baseAmount: Int) = when (this.type) {
+    fun discount(baseAmount: Long) = when (this.type) {
         CouponBenefitType.AMOUNT -> {
             val amount = this.amount!!
             if (baseAmount >= amount) baseAmount - amount

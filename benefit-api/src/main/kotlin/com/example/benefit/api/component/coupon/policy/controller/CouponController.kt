@@ -16,6 +16,11 @@ class CouponController(
         @PathVariable("couponId") couponId: String,
     ) = couponService.findById(couponId)
 
+    @GetMapping("/coupons/{issueCode}/by-code")
+    fun findByIssueCode(
+        @PathVariable("issueCode") issueCode: String,
+    ) = couponService.findByIssueCode(issueCode)
+
     @PostMapping("/coupons")
     fun create(
         @RequestBody request: CouponRequest,

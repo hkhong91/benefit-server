@@ -1,5 +1,6 @@
 package com.example.benefit.domain.component.coupon.policy.document
 
+import com.example.benefit.domain.component.coupon.policy.data.CouponLimitLevel
 import java.time.Instant
 
 data class CouponIssue(

@@ -1,5 +1,6 @@
 package com.example.benefit.domain.component.coupon.policy.document
 
+import com.example.benefit.domain.component.coupon.policy.data.CouponUsePeriodType
 import java.time.Duration
 import java.time.Instant
 

@@ -9,9 +9,9 @@ import java.time.Instant
 interface UserCouponRepository : MongoRepository<UserCoupon, String> {
     fun countByCouponId(couponId: String): Long
 
+    fun findAllByCouponId(couponId: String): List<UserCoupon>
+
     fun existsByUserIdAndCouponId(userId: String, couponId: String): Boolean
 
     fun findAllByUserIdAndExpiredAtBefore(userId: String, expiredAt: Instant): List<UserCoupon>
-
-    fun findAllByCouponIdAndExpiredAtBefore(couponId: String, expiredAt: Instant): List<UserCoupon>
 }

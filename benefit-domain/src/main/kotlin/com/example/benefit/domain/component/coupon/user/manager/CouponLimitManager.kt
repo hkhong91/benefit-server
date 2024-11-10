@@ -1,8 +1,8 @@
 package com.example.benefit.domain.component.coupon.user.manager
 
 import com.example.benefit.domain.component.coupon.policy.document.Coupon
-import com.example.benefit.domain.component.coupon.policy.document.CouponLimitLevel
-import com.example.benefit.domain.component.coupon.policy.document.CouponIssueStatus
+import com.example.benefit.domain.component.coupon.policy.data.CouponLimitLevel
+import com.example.benefit.domain.component.coupon.policy.data.CouponIssueStatus
 import org.slf4j.LoggerFactory
 
 abstract class CouponLimitManager {

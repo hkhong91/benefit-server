@@ -1,5 +1,6 @@
 package com.example.benefit.domain.component.coupon.policy.document
 
+import com.example.benefit.domain.component.coupon.policy.data.CouponIssueStatus
 import com.example.benefit.domain.component.coupon.user.document.UserCoupon
 
 sealed class CouponIssueResult(

@@ -1,6 +1,8 @@
 package com.example.benefit.domain.component.coupon.user.document
 
 import com.example.benefit.domain.component.coupon.policy.document.Coupon
+import com.example.benefit.domain.component.coupon.policy.document.CouponBenefit
+import com.example.benefit.domain.component.coupon.policy.document.CouponVoucherRestriction
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate
@@ -9,18 +11,24 @@ import java.time.Instant
 
 @Document(collection = "user_coupon")
 data class UserCoupon(
-    val title: String,
+    var title: String,
 
-    val description: String,
+    var description: String,
 
     val userId: String,
 
     val couponId: String,
 
-    var isUsed: Boolean,
+    var expiredAt: Instant,
 
-    val expiredAt: Instant,
+    var benefit: CouponBenefit,
+
+    var voucherRestrictions: List<CouponVoucherRestriction>,
 ) {
+    var isUsed: Boolean = false
+
+    var discountAmount: Long? = null
+
     var usedAt: Instant? = null
 
     var canceledAt: Instant? = null
@@ -34,6 +42,19 @@ data class UserCoupon(
     @LastModifiedDate
     lateinit var modifiedAt: Instant
 
+    fun isEqualsTo(coupon: Coupon, at: Instant): Boolean {
+        return this.title == coupon.title
+            && this.description == coupon.description
+            && this.expiredAt == coupon.usePeriod.getExpiredAt(at)
+    }
+
+    fun modify(coupon: Coupon, at: Instant): UserCoupon {
+        this.title = coupon.title
+        this.description = coupon.description
+        this.expiredAt = coupon.usePeriod.getExpiredAt(at)
+        return this
+    }
+
     fun isUsable(at: Instant) = !this.isUsed && !this.expiredAt.isBefore(at)
 
     companion object {
@@ -42,8 +63,9 @@ data class UserCoupon(
             description = coupon.description,
             userId = userId,
             couponId = coupon.id,
-            isUsed = false,
-            expiredAt = coupon.usePeriod.getExpiredAt(now)
+            expiredAt = coupon.usePeriod.getExpiredAt(now),
+            benefit = coupon.benefit,
+            voucherRestrictions = coupon.voucherRestrictions,
         )
     }
 }
