@@ -40,14 +40,14 @@ data class Coupon(
     }
 
     fun modify(coupon: Coupon): Coupon {
-        this.title = coupon.title
-        this.description = coupon.description
-        this.status = coupon.status
-        this.benefit = coupon.benefit
-        this.issue = coupon.issue
-        this.usePeriod = coupon.usePeriod
-        this.voucherRestrictions = coupon.voucherRestrictions
-        this.memo = coupon.memo
+        title = coupon.title
+        description = coupon.description
+        status = coupon.status
+        benefit = coupon.benefit
+        issue = coupon.issue
+        usePeriod = coupon.usePeriod
+        voucherRestrictions = coupon.voucherRestrictions
+        memo = coupon.memo
         return coupon
     }
 }

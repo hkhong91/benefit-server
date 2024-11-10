@@ -20,14 +20,6 @@ class UserCouponIssueService(
     private val couponPaperRepository: CouponPaperRepository,
     private val couponIssueManager: CouponIssueManager,
 ) {
-    fun issueById(userId: String, couponId: String): UserCouponResponse {
-        val now = Instant.now()
-        val coupon = couponRepository.findById(couponId)
-            .orElseThrow { ApiException.of(ErrorCode.E0001) }
-        val issueResult = couponIssueManager.issue(userId, coupon, now)
-        return UserCouponResponse.validateOf(issueResult)
-    }
-
     fun issueByIssueCode(userId: String, issueCode: String): UserCouponResponse {
         val now = Instant.now()
         val coupon = couponRepository.findByIssueCode(issueCode)

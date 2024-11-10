@@ -11,7 +11,7 @@ data class CouponIssue(
     val level: CouponLimitLevel,
     var exhausted: Boolean,
 ) {
-    fun isEligible(at: Instant) = at in this.startAt..this.endAt
+    fun isEligible(at: Instant) = at in startAt..endAt
 
-    fun isExhausted(totalCount: Long) = totalCount >= this.totalLimit
+    fun isExhausted(totalCount: Long) = totalCount >= totalLimit
 }

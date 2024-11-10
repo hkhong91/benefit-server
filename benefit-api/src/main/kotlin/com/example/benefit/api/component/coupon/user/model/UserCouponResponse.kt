@@ -2,8 +2,8 @@ package com.example.benefit.api.component.coupon.user.model
 
 import com.example.benefit.api.configuration.exception.ApiException
 import com.example.benefit.api.configuration.exception.ErrorCode
-import com.example.benefit.domain.component.coupon.policy.document.CouponIssueResult
 import com.example.benefit.domain.component.coupon.policy.data.CouponIssueStatus
+import com.example.benefit.domain.component.coupon.policy.document.CouponIssueResult
 import com.example.benefit.domain.component.coupon.user.document.UserCoupon
 import java.time.Instant
 

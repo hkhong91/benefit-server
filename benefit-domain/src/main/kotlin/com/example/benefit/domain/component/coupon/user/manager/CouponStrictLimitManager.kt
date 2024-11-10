@@ -1,8 +1,8 @@
 package com.example.benefit.domain.component.coupon.user.manager
 
-import com.example.benefit.domain.component.coupon.policy.document.Coupon
-import com.example.benefit.domain.component.coupon.policy.data.CouponLimitLevel
 import com.example.benefit.domain.component.coupon.policy.data.CouponIssueStatus
+import com.example.benefit.domain.component.coupon.policy.data.CouponLimitLevel
+import com.example.benefit.domain.component.coupon.policy.document.Coupon
 import com.example.benefit.domain.component.coupon.policy.infrastructure.CouponRepository
 import com.example.benefit.domain.configuration.redis.RedisKey
 import org.springframework.data.redis.core.StringRedisTemplate

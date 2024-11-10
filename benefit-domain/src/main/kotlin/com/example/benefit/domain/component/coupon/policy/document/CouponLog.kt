@@ -1,7 +1,6 @@
 package com.example.benefit.domain.component.coupon.policy.document
 
 import com.example.benefit.domain.component.coupon.policy.data.CouponStatus
-import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
@@ -23,12 +22,13 @@ data class CouponLog(
     val usePeriod: CouponUsePeriod,
 
     val memo: String,
+
+    val createdAt: Instant,
+
+    val modifiedAt: Instant,
 ) {
     @Id
     lateinit var id: String
-
-    @CreatedDate
-    lateinit var createdAt: Instant
 
     companion object {
         fun of(coupon: Coupon) = CouponLog(
@@ -40,6 +40,8 @@ data class CouponLog(
             issue = coupon.issue,
             usePeriod = coupon.usePeriod,
             memo = coupon.memo,
+            createdAt = coupon.createdAt,
+            modifiedAt = coupon.modifiedAt,
         )
     }
 }

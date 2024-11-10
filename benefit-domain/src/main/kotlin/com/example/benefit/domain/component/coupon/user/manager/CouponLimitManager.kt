@@ -1,8 +1,8 @@
 package com.example.benefit.domain.component.coupon.user.manager
 
-import com.example.benefit.domain.component.coupon.policy.document.Coupon
-import com.example.benefit.domain.component.coupon.policy.data.CouponLimitLevel
 import com.example.benefit.domain.component.coupon.policy.data.CouponIssueStatus
+import com.example.benefit.domain.component.coupon.policy.data.CouponLimitLevel
+import com.example.benefit.domain.component.coupon.policy.document.Coupon
 import org.slf4j.LoggerFactory
 
 abstract class CouponLimitManager {
@@ -17,9 +17,9 @@ abstract class CouponLimitManager {
     protected abstract fun exhaust(userId: String, coupon: Coupon): Boolean
 
     fun limit(userId: String, coupon: Coupon): CouponIssueStatus {
-        val status = this.verify(userId, coupon)
+        val status = verify(userId, coupon)
         if (status == CouponIssueStatus.EXHAUSTED) {
-            val exhausted = this.exhaust(userId, coupon)
+            val exhausted = exhaust(userId, coupon)
             if (exhausted) {
                 log.info("[쿠폰 소진] couponId: ${coupon.id}")
             }

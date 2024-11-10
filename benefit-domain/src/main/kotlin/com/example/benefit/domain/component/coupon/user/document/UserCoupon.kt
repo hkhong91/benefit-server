@@ -11,13 +11,13 @@ import java.time.Instant
 
 @Document(collection = "user_coupon")
 data class UserCoupon(
-    var title: String,
-
-    var description: String,
-
     val userId: String,
 
     val couponId: String,
+
+    var title: String,
+
+    var description: String,
 
     var expiredAt: Instant,
 
@@ -43,27 +43,27 @@ data class UserCoupon(
     lateinit var modifiedAt: Instant
 
     fun isEqualsTo(coupon: Coupon, at: Instant): Boolean {
-        return this.title == coupon.title
-            && this.description == coupon.description
-            && this.expiredAt == coupon.usePeriod.getExpiredAt(at)
+        return title == coupon.title
+            && description == coupon.description
+            && expiredAt == coupon.usePeriod.getExpiredAt(at)
     }
 
     fun modify(coupon: Coupon, at: Instant): UserCoupon {
-        this.title = coupon.title
-        this.description = coupon.description
-        this.expiredAt = coupon.usePeriod.getExpiredAt(at)
+        title = coupon.title
+        description = coupon.description
+        expiredAt = coupon.usePeriod.getExpiredAt(at)
         return this
     }
 
-    fun isUsable(at: Instant) = !this.isUsed && !this.expiredAt.isBefore(at)
+    fun isUsable(at: Instant) = !isUsed && !expiredAt.isBefore(at)
 
     companion object {
-        fun issue(userId: String, coupon: Coupon, now: Instant) = UserCoupon(
-            title = coupon.title,
-            description = coupon.description,
+        fun issue(userId: String, coupon: Coupon, at: Instant) = UserCoupon(
             userId = userId,
             couponId = coupon.id,
-            expiredAt = coupon.usePeriod.getExpiredAt(now),
+            title = coupon.title,
+            description = coupon.description,
+            expiredAt = coupon.usePeriod.getExpiredAt(at),
             benefit = coupon.benefit,
             voucherRestrictions = coupon.voucherRestrictions,
         )

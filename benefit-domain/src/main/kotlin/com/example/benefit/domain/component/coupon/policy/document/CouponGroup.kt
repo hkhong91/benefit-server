@@ -22,8 +22,8 @@ data class CouponGroup(
     lateinit var modifiedAt: Instant
 
     fun modify(group: CouponGroup): CouponGroup {
-        this.code = group.code
-        this.coupons = group.coupons
+        code = group.code
+        coupons = group.coupons
         return group
     }
 }

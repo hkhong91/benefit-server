@@ -14,17 +14,17 @@ data class CouponRequest(
     val memo: String,
 ) {
     fun createDocument() = Coupon(
-        title = this.title,
-        description = this.description,
-        status = this.status,
-        benefit = this.benefit,
-        issue = this.issue,
-        usePeriod = this.usePeriod,
-        voucherRestrictions = this.voucherRestrictions,
-        memo = this.memo,
+        title = title,
+        description = description,
+        status = status,
+        benefit = benefit,
+        issue = issue,
+        usePeriod = usePeriod,
+        voucherRestrictions = voucherRestrictions,
+        memo = memo,
     )
 
-    fun updateDocument(coupon: Coupon): Coupon {
+    fun modifyDocument(coupon: Coupon): Coupon {
         return coupon.modify(createDocument())
     }
 }

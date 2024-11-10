@@ -9,7 +9,7 @@ data class UserCouponUseRequest(
 ) {
     fun validate(restrictions: List<CouponVoucherRestriction>) =
         restrictions.any { restriction ->
-            this.affiliateId == restriction.affiliateId &&
-                (restriction.isAllProducts || restriction.productIds.contains(this.productId))
+            affiliateId == restriction.affiliateId &&
+                (restriction.isAllProducts || restriction.productIds.contains(productId))
         }
 }

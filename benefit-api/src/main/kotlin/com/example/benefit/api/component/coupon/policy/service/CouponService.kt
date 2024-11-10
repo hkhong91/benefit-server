@@ -42,7 +42,7 @@ class CouponService(
     fun modify(couponId: String, request: CouponRequest): CouponResponse {
         val coupon = couponRepository.findById(couponId)
             .orElseThrow { ApiException.of(ErrorCode.E0001) }
-        val modifiedCoupon = couponRepository.save(request.updateDocument(coupon))
+        val modifiedCoupon = couponRepository.save(request.modifyDocument(coupon))
         couponLogRepository.insert(CouponLog.of(modifiedCoupon))
 
         if (modifiedCoupon.status.isActive()) {

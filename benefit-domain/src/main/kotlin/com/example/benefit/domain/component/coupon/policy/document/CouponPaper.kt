@@ -21,5 +21,5 @@ data class CouponPaper(
     @CreatedDate
     lateinit var createdAt: Instant
 
-    fun isEligible(at: Instant) = this.userCouponId == null && !this.expiredAt.isBefore(at)
+    fun isEligible(at: Instant) = userCouponId == null && !expiredAt.isBefore(at)
 }

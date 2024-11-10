@@ -9,16 +9,16 @@ data class CouponBenefit(
     val percentage: Float?,
     val maxAmount: Long?,
 ) {
-    fun discount(baseAmount: Long) = when (this.type) {
+    fun discount(baseAmount: Long) = when (type) {
         CouponBenefitType.AMOUNT -> {
-            val amount = this.amount!!
+            val amount = amount!!
             if (baseAmount >= amount) baseAmount - amount
             else 0
         }
 
         CouponBenefitType.PERCENTAGE -> {
-            val percentage = this.percentage!!
-            val maxAmount = this.maxAmount!!
+            val percentage = percentage!!
+            val maxAmount = maxAmount!!
             val discountAmount = round(baseAmount * percentage / 100).toInt()
             if (maxAmount >= discountAmount) {
                 baseAmount - discountAmount

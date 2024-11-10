@@ -1,34 +1,28 @@
 package com.example.benefit.api.component.coupon.user.controller
 
 import com.example.benefit.api.component.coupon.user.model.UserCouponUseRequest
+import com.example.benefit.api.component.coupon.user.service.UserCouponFindService
 import com.example.benefit.api.component.coupon.user.service.UserCouponIssueService
-import com.example.benefit.api.component.coupon.user.service.UserCouponService
 import com.example.benefit.api.component.coupon.user.service.UserCouponUseService
 import com.example.benefit.api.configuration.web.ApiHeader
 import org.springframework.web.bind.annotation.*
 
 @RestController
 class UserCouponController(
-    private val userCouponService: UserCouponService,
+    private val userCouponFindService: UserCouponFindService,
     private val userCouponIssueService: UserCouponIssueService,
     private val userCouponUseService: UserCouponUseService,
 ) {
     @GetMapping("/user-coupons")
     fun findAll(
         @RequestHeader(ApiHeader.USER_ID) userId: String,
-    ) = userCouponService.findAll(userId)
+    ) = userCouponFindService.findAll(userId)
 
     @GetMapping("/user-coupons/{userCouponId}/detail")
     fun findDetail(
         @RequestHeader(ApiHeader.USER_ID) userId: String,
         @PathVariable("userCouponId") userCouponId: String,
-    ) = userCouponService.findDetail(userId, userCouponId)
-
-    @PostMapping("/user-coupons/issue/by-id")
-    fun issueById(
-        @RequestHeader(ApiHeader.USER_ID) userId: String,
-        @RequestParam("couponId") couponId: String,
-    ) = userCouponIssueService.issueById(userId, couponId)
+    ) = userCouponFindService.findDetail(userId, userCouponId)
 
     @PostMapping("/user-coupons/issue/by-issue-code")
     fun issueByIssueCode(

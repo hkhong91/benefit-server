@@ -8,7 +8,7 @@ data class CouponGroupRequest(
     val couponIds: Set<String>,
 ) {
     fun createDocument(coupons: List<Coupon>) = CouponGroup(
-        code = this.code,
+        code = code,
         coupons = coupons,
     )
 

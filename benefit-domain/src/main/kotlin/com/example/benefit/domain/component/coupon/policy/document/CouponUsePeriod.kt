@@ -10,8 +10,8 @@ data class CouponUsePeriod(
     val endAt: Instant? = null,
     val days: Long? = null,
 ) {
-    fun getExpiredAt(now: Instant): Instant = when (this.type) {
-        CouponUsePeriodType.FROM_TO -> this.endAt!!
-        CouponUsePeriodType.WITHIN_DAYS -> now.plus(Duration.ofDays(this.days!!))
+    fun getExpiredAt(at: Instant): Instant = when (type) {
+        CouponUsePeriodType.FROM_TO -> endAt!!
+        CouponUsePeriodType.WITHIN_DAYS -> at.plus(Duration.ofDays(days!!))
     }
 }

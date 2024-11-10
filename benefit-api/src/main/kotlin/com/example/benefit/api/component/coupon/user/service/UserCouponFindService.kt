@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 import java.time.Instant
 
 @Service
-class UserCouponService(
+class UserCouponFindService(
     private val userCouponRepository: UserCouponRepository,
     private val couponRepository: CouponRepository,
 ) {
