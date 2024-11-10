@@ -1,6 +1,8 @@
 Benefit Server
 ===========
 
+## Settings
+
 To run the application, you need to install DBs.
 
 <pre>
